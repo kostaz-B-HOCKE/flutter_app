@@ -76,7 +76,7 @@ class _CatalogsPageState extends State<CatalogsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Каталоги'),
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Color(0xFF388E3C), // Темно-зеленый вместо розового
       ),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
@@ -97,7 +97,7 @@ class _CatalogsPageState extends State<CatalogsPage> {
                         ElevatedButton(
                           onPressed: _refreshCatalogs,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.pinkAccent,
+                            backgroundColor: Color(0xFF388E3C), // Темно-зеленый вместо розового
                           ),
                           child: const Text('Попробовать снова'),
                         ),
@@ -116,7 +116,7 @@ class _CatalogsPageState extends State<CatalogsPage> {
                         ElevatedButton(
                           onPressed: _refreshCatalogs,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.pinkAccent,
+                            backgroundColor: Color(0xFF388E3C), // Темно-зеленый вместо розового
                           ),
                           child: const Text('Обновить'),
                         ),
@@ -213,7 +213,7 @@ class _CatalogCard extends StatelessWidget {
                           'Посмотреть букеты',
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.pinkAccent,
+                            color: Color(0xFF388E3C), // Темно-зеленый вместо розового
                             fontWeight: FontWeight.w500,
                           ),
                         ),

@@ -20,5 +20,5 @@ class SupabaseManager {
       throw Exception('Supabase not initialized. Call initialize() first.');
     }
     return Supabase.instance.client;
-  }
+  } 
 }

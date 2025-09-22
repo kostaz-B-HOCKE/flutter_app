@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: Color(0xFFE8F5E9), // Светло-зеленый фон для всей страницы
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
@@ -47,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Icon(
                   Icons.local_florist,
                   size: 64,
-                  color: Colors.pinkAccent,
+                  color: Color(0xFF388E3C), // Темно-зеленый вместо розового
                 ),
                 const SizedBox(height: 16),
                 const Text(
@@ -88,11 +87,11 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: TextField(
                 controller: _phoneController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Номер телефона',
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 18),
-                  prefixIcon: Icon(Icons.phone, color: Colors.pinkAccent),
+                  prefixIcon: Icon(Icons.phone, color: Color(0xFF388E3C)), // Темно-зеленый
                   hintText: '+7 900 123-45-67',
                   hintStyle: TextStyle(color: Colors.grey),
                 ),
@@ -113,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   : ElevatedButton(
                       onPressed: () => _login(context),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.pinkAccent,
+                        backgroundColor: Color(0xFF388E3C), // Темно-зеленый вместо розового
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),

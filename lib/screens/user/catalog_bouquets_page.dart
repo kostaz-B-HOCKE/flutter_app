@@ -178,31 +178,66 @@ void _applyFilters(Map<String, dynamic> filters) async {
 
 }
 
-  // void _loadInitialData() async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-    
-  //   // Загружаем типы цветов для фильтра
-  //   final flowers = await _bouquetRepository.getFlowerTypes();
-    
-  //   // Загружаем букеты с текущими фильтрами
-  //   final bouquets = await _bouquetRepository.getFilteredBouquets(
-  //     catalogId: widget.catalog.id,
-  //     minPrice: _currentMinPrice,
-  //     maxPrice: _currentMaxPrice,
-  //     includedFlowerIds: _includedFlowerIds,
-  //     excludedFlowerIds: _excludedFlowerIds,
-  //   );
-
-  //   if (mounted) {
-  //     setState(() {
-  //       _availableFlowers = flowers;
-  //       _filteredBouquets = bouquets;
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.catalog.name),
+        backgroundColor: Color(0xFF388E3C), // Темно-зеленый AppBar
+        foregroundColor: Colors.white,
+        actions: [
+          FilteringWidget(onFilterPressed: _openFilterDialog),
+          const SizedBox(width: 8),
+        ],
+      ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _filteredBouquets.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.local_florist, size: 64, color: Colors.grey[600]),
+                      const SizedBox(height: 16),
+                      Text(
+                        _includedFlowerIds.isNotEmpty || _excludedFlowerIds.isNotEmpty || 
+                        _currentMinPrice > 0 || _currentMaxPrice < 12000
+                            ? 'По выбранным фильтрам букетов не найдено'
+                            : 'В каталоге "${widget.catalog.name}" пока нет букетов',
+                        style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                        textAlign: TextAlign.center,
+                      ),
+                      if (_includedFlowerIds.isNotEmpty || _excludedFlowerIds.isNotEmpty || 
+                          _currentMinPrice > 0 || _currentMaxPrice < 12000)
+                        TextButton(
+                          onPressed: _loadInitialData,
+                          child: Text(
+                            'Сбросить фильтры',
+                            style: TextStyle(color: Color(0xFF388E3C)),
+                          ),
+                        ),
+                    ],
+                  ),
+                )
+              : GridView.builder(
+                  padding: const EdgeInsets.all(8),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                    childAspectRatio: 0.7,
+                  ),
+                  itemCount: _filteredBouquets.length,
+                  itemBuilder: (context, index) {
+                    final bouquet = _filteredBouquets[index];
+                    return _BouquetCard(
+                      bouquet: bouquet,
+                      onTap: () => _showBouquetDetails(bouquet),
+                    );
+                  },
+                ),
+    );
+  }
 
   void _openFilterDialog() {
     showDialog(
@@ -220,31 +255,6 @@ void _applyFilters(Map<String, dynamic> filters) async {
       }
     });
   }
-
-  // void _applyFilters(Map<String, dynamic> filters) async {
-  //   setState(() {
-  //     _isLoading = true;
-  //     _currentMinPrice = filters['minPrice'];
-  //     _currentMaxPrice = filters['maxPrice'];
-  //     _includedFlowerIds = List<int>.from(filters['includedFlowerIds'] ?? []);
-  //     _excludedFlowerIds = List<int>.from(filters['excludedFlowerIds'] ?? []);
-  //   });
-
-  //   final bouquets = await _bouquetRepository.getFilteredBouquets(
-  //     catalogId: widget.catalog.id,
-  //     minPrice: _currentMinPrice,
-  //     maxPrice: _currentMaxPrice,
-  //     includedFlowerIds: _includedFlowerIds,
-  //     excludedFlowerIds: _excludedFlowerIds,
-  //   );
-
-  //   if (mounted) {
-  //     setState(() {
-  //       _filteredBouquets = bouquets;
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
 
 void _showBouquetDetails(Bouquet bouquet) {
   showModalBottomSheet(
@@ -284,7 +294,7 @@ void _showBouquetDetails(Bouquet bouquet) {
                   Text(
                     bouquet.name,
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: Colors.black, // Меняем на черный
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                   ),
@@ -292,7 +302,7 @@ void _showBouquetDetails(Bouquet bouquet) {
                   Text(
                     '${bouquet.price.toStringAsFixed(2)} руб.',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Colors.black, // Меняем на черный
+                          color: Color(0xFF388E3C), // Зеленый цвет цены
                           fontWeight: FontWeight.bold,
                         ),
                   ),
@@ -300,7 +310,7 @@ void _showBouquetDetails(Bouquet bouquet) {
                   Text(
                     bouquet.description,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Colors.black87, // Также делаем описание темнее
+                          color: Colors.black87,
                         ),
                   ),
                   
@@ -314,7 +324,7 @@ void _showBouquetDetails(Bouquet bouquet) {
                           'Состав букета:',
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black, // Заголовок состава тоже черный
+                                color: Colors.black,
                               ),
                         ),
                         const SizedBox(height: 8),
@@ -351,12 +361,12 @@ void _showBouquetDetails(Bouquet bouquet) {
                                 return Chip(
                                   label: Text(
                                     flowerName,
-                                    style: const TextStyle(
-                                      color: Colors.black87, // Черный текст в чипах
+                                    style: TextStyle(
+                                      color: Colors.white,
                                       fontSize: 12,
                                     ),
                                   ),
-                                  backgroundColor: Colors.grey[200], // Светло-серый фон
+                                  backgroundColor: Color(0xFF4CAF50), // Зеленый фон
                                   side: BorderSide.none,
                                 );
                               }).toList(),
@@ -376,63 +386,6 @@ void _showBouquetDetails(Bouquet bouquet) {
     },
   );
 }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.catalog.name),
-        backgroundColor: Colors.pinkAccent,
-        actions: [
-          FilteringWidget(onFilterPressed: _openFilterDialog),
-          const SizedBox(width: 8),
-        ],
-      ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : _filteredBouquets.isEmpty
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.local_florist, size: 64, color: Colors.grey),
-                      const SizedBox(height: 16),
-                      Text(
-                        _includedFlowerIds.isNotEmpty || _excludedFlowerIds.isNotEmpty || 
-                        _currentMinPrice > 0 || _currentMaxPrice < 12000
-                            ? 'По выбранным фильтрам букетов не найдено'
-                            : 'В каталоге "${widget.catalog.name}" пока нет букетов',
-                        style: const TextStyle(fontSize: 16, color: Colors.grey),
-                        textAlign: TextAlign.center,
-                      ),
-                      if (_includedFlowerIds.isNotEmpty || _excludedFlowerIds.isNotEmpty || 
-                          _currentMinPrice > 0 || _currentMaxPrice < 12000)
-                        TextButton(
-                          onPressed: _loadInitialData,
-                          child: const Text('Сбросить фильтры'),
-                        ),
-                    ],
-                  ),
-                )
-              : GridView.builder(
-                  padding: const EdgeInsets.all(8),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                    childAspectRatio: 0.7,
-                  ),
-                  itemCount: _filteredBouquets.length,
-                  itemBuilder: (context, index) {
-                    final bouquet = _filteredBouquets[index];
-                    return _BouquetCard(
-                      bouquet: bouquet,
-                      onTap: () => _showBouquetDetails(bouquet),
-                    );
-                  },
-                ),
-    );
-  }
 }
 
 class _BouquetCard extends StatelessWidget {
@@ -487,7 +440,7 @@ class _BouquetCard extends StatelessWidget {
                   Text(
                     '${bouquet.price.toStringAsFixed(2)} руб.',
                     style: TextStyle(
-                      color: Colors.pinkAccent,
+                      color: Color(0xFF388E3C), // Зеленый цвет цены
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                     ),

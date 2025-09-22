@@ -51,9 +51,36 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Цветочный магазин',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
+        primaryColor: Color(0xFF388E3C), // Основной цвет - темно-зеленый
+        primarySwatch: Colors.green, // Зеленая палитра вместо розовой
+        colorScheme: ColorScheme.light(
+          primary: Color(0xFF388E3C), // Основной цвет
+          secondary: Color(0xFF4CAF50), // Дополнительный цвет
+          background: Color(0xFFE8F5E9), // Фоновый цвет
+        ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        scaffoldBackgroundColor: Colors.lightGreen[50], //светлозеленый фон
+        scaffoldBackgroundColor: Color(0xFFE8F5E9), // Светло-зеленый фон
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color(0xFF388E3C), // Темно-зеленый AppBar
+          foregroundColor: Colors.white,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xFF4CAF50), // Зеленая кнопка
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: Color(0xFF388E3C), // Зеленый текст для текстовых кнопок
+          ),
+        ),
+        iconTheme: IconThemeData(
+          color: Color(0xFF388E3C), // Зеленые иконки
+        ),
       ),
       home: Consumer<AuthService>(
         builder: (context, authService, child) {
@@ -108,7 +135,8 @@ class _MainScreenState extends State<MainScreen> {
           ? 'Панель администратора' 
           : 'Цветочный магазин "Flora"'
         ),
-        backgroundColor: Colors.pinkAccent,
+        backgroundColor: Color(0xFF388E3C), // Темно-зеленый AppBar
+        foregroundColor: Colors.white,
         actions: [
           if (authService.isLoggedIn)
             IconButton(
@@ -125,8 +153,9 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.pinkAccent,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: Color(0xFF388E3C), // Темно-зеленый для выбранного элемента
+        unselectedItemColor: Colors.grey[600],
+        backgroundColor: Colors.white,
         items: authService.isAdmin
             ? _adminNavigationItems()
             : _userNavigationItems(),
@@ -167,7 +196,7 @@ class PlaceholderWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 64.0, color: Colors.grey),
+          Icon(icon, size: 64.0, color: Color(0xFF388E3C)), // Зеленая иконка
           const SizedBox(height: 16),
           Text(
             'Раздел: $title',
@@ -178,7 +207,7 @@ class PlaceholderWidget extends StatelessWidget {
             authService.isAdmin ? 'Режим администратора' : 'Режим пользователя',
             style: TextStyle(
               fontSize: 16,
-              color: authService.isAdmin ? Colors.red : Colors.blue,
+              color: authService.isAdmin ? Color(0xFFD32F2F) : Color(0xFF1976D2),
             ),
           ),
           const SizedBox(height: 8),

@@ -18,6 +18,7 @@ class FilteringWidget extends StatelessWidget {
           icon: const Icon(Icons.filter_list),
           onPressed: onFilterPressed,
           tooltip: 'Фильтры',
+          color: Colors.white, // Белая иконка для контраста с зеленым AppBar
         ),
         if (activeFiltersCount != null && activeFiltersCount! > 0)
           Positioned(
@@ -70,9 +71,9 @@ class AdvancedFilteringWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          color: activeFiltersCount > 0 ? Colors.pinkAccent.withOpacity(0.1) : null,
+          color: activeFiltersCount > 0 ? Color(0xFF4CAF50).withOpacity(0.1) : null, // Светло-зеленый фон
           border: Border.all(
-            color: activeFiltersCount > 0 ? Colors.pinkAccent : Colors.grey,
+            color: activeFiltersCount > 0 ? Color(0xFF388E3C) : Colors.grey, // Темно-зеленая граница
             width: 1,
           ),
           borderRadius: BorderRadius.circular(20),
@@ -83,14 +84,14 @@ class AdvancedFilteringWidget extends StatelessWidget {
             Icon(
               Icons.filter_list,
               size: 18,
-              color: activeFiltersCount > 0 ? Colors.pinkAccent : Colors.grey,
+              color: activeFiltersCount > 0 ? Color(0xFF388E3C) : Colors.grey, // Темно-зеленая иконка
             ),
             const SizedBox(width: 4),
             if (activeFiltersCount > 0)
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: Colors.pinkAccent,
+                  color: Color(0xFF388E3C), // Темно-зеленый фон
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
@@ -108,7 +109,7 @@ class AdvancedFilteringWidget extends StatelessWidget {
                 filterSummary,
                 style: TextStyle(
                   fontSize: 12,
-                  color: activeFiltersCount > 0 ? Colors.pinkAccent : Colors.grey,
+                  color: activeFiltersCount > 0 ? Color(0xFF388E3C) : Colors.grey, // Темно-зеленый текст
                 ),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -137,7 +138,7 @@ class SimpleFilterIcon extends StatelessWidget {
     return IconButton(
       icon: Icon(
         Icons.filter_list,
-        color: hasActiveFilters ? Colors.pinkAccent : null,
+        color: hasActiveFilters ? Color(0xFF388E3C) : Colors.white, // Темно-зеленая или белая иконка
       ),
       onPressed: onFilterPressed,
       tooltip: 'Фильтры',

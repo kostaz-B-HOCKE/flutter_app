@@ -371,7 +371,7 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)), // Темно-зеленый
         ),
         const SizedBox(height: 8),
         
@@ -396,10 +396,10 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
             Expanded(
               child: OutlinedButton.icon(
                 onPressed: () => onPick(ImageSource.gallery),
-                icon: const Icon(Icons.photo_library),
-                label: const Text('Из галереи'),
+                icon: Icon(Icons.photo_library, color: Color(0xFF43A047)), // Ярко-зеленый
+                label: Text('Из галереи', style: TextStyle(color: Color(0xFF43A047))), // Ярко-зеленый
                 style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.pinkAccent),
+                  side: BorderSide(color: Color(0xFF43A047)), // Ярко-зеленая рамка
                 ),
               ),
             ),
@@ -407,10 +407,10 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
             Expanded(
               child: OutlinedButton.icon(
                 onPressed: () => onPick(ImageSource.camera),
-                icon: const Icon(Icons.camera_alt),
-                label: const Text('Камера'),
+                icon: Icon(Icons.camera_alt, color: Color(0xFF43A047)), // Ярко-зеленый
+                label: Text('Камера', style: TextStyle(color: Color(0xFF43A047))), // Ярко-зеленый
                 style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.pinkAccent),
+                  side: BorderSide(color: Color(0xFF43A047)), // Ярко-зеленая рамка
                 ),
               ),
             ),
@@ -430,7 +430,7 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                 });
               }
             },
-            child: const Text('Убрать изображение', style: TextStyle(color: Colors.red)),
+            child: Text('Убрать изображение', style: TextStyle(color: Color(0xFF43A047))), // Ярко-зеленый
           ),
       ],
     );
@@ -448,35 +448,38 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.pinkAccent,
-        toolbarHeight: 0, // Полностью убираем верхний отступ AppBar
+        backgroundColor: Color(0xFF1B5E20), // Темно-зеленый для контраста
+        foregroundColor: Colors.white, // Белый текст для видимости
+        toolbarHeight: 0,
         elevation: 0,
         bottom: TabBar(
           controller: _tabController,
-          labelStyle: const TextStyle(
+          labelStyle: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
+            color: Colors.white, // Белый текст для видимости
           ),
-          unselectedLabelStyle: const TextStyle(
+          unselectedLabelStyle: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.normal,
+            color: Colors.white70, // Светло-белый для неактивных
           ),
           indicatorColor: Colors.white,
           indicatorWeight: 3,
           padding: const EdgeInsets.symmetric(horizontal: 16),
           tabs: const [
             Tab(
-              icon: Icon(Icons.local_florist, size: 22),
+              icon: Icon(Icons.local_florist, size: 22, color: Colors.white), // Белая иконка
               text: 'Букет',
               iconMargin: EdgeInsets.only(bottom: 2),
             ),
             Tab(
-              icon: Icon(Icons.category, size: 22),
+              icon: Icon(Icons.category, size: 22, color: Colors.white), // Белая иконка
               text: 'Каталог',
               iconMargin: EdgeInsets.only(bottom: 2),
             ),
             Tab(
-              icon: Icon(Icons.style, size: 22),
+              icon: Icon(Icons.style, size: 22, color: Colors.white), // Белая иконка
               text: 'Тип',
               iconMargin: EdgeInsets.only(bottom: 2),
             ),
@@ -494,12 +497,12 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
+                  Text(
                     'Добавить новый букет',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.pinkAccent,
+                      color: Color(0xFF2E7D32), // Темно-зеленый
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -517,7 +520,7 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                     decoration: InputDecoration(
                       labelText: 'Название букета',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      prefixIcon: const Icon(Icons.local_florist),
+                      prefixIcon: Icon(Icons.local_florist, color: Color(0xFF43A047)), // Ярко-зеленый
                     ),
                     validator: (value) => value?.isEmpty ?? true ? 'Введите название' : null,
                   ),
@@ -528,7 +531,7 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                     decoration: InputDecoration(
                       labelText: 'Описание',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      prefixIcon: const Icon(Icons.description),
+                      prefixIcon: Icon(Icons.description, color: Color(0xFF43A047)), // Ярко-зеленый
                     ),
                     maxLines: 3,
                     validator: (value) => value?.isEmpty ?? true ? 'Введите описание' : null,
@@ -540,7 +543,7 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                     decoration: InputDecoration(
                       labelText: 'Цена (руб.)',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      prefixIcon: const Icon(Icons.attach_money),
+                      prefixIcon: Icon(Icons.attach_money, color: Color(0xFF43A047)), // Ярко-зеленый
                     ),
                     keyboardType: TextInputType.number,
                     validator: (value) {
@@ -576,9 +579,10 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                           onPressed: _clearBouquetForm,
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            side: const BorderSide(color: Colors.pinkAccent),
+                            side: BorderSide(color: Color(0xFF4CAF50)), // Зеленая рамка
+                            backgroundColor: Color(0xFFE8F5E9), // Светло-зеленый фон
                           ),
-                          child: const Text('Очистить', style: TextStyle(color: Colors.pinkAccent)),
+                          child: Text('Очистить', style: TextStyle(color: Color(0xFF2E7D32), fontWeight: FontWeight.bold)), // Темно-зеленый текст
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -586,12 +590,12 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                         child: ElevatedButton(
                           onPressed: _isLoading ? null : _submitBouquetForm,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.pinkAccent,
+                            backgroundColor: Color(0xFF4CAF50), // Зеленый фон
                             padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
                           child: _isLoading
-                              ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2)
-                              : const Text('Добавить букет', style: TextStyle(fontWeight: FontWeight.bold)),
+                              ? CircularProgressIndicator(color: Colors.white, strokeWidth: 2)
+                              : Text('Добавить букет', style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ],
@@ -609,12 +613,12 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
+                  Text(
                     'Добавить новый каталог',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.pinkAccent,
+                      color: Color(0xFF2E7D32), // Темно-зеленый
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -632,7 +636,7 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                     decoration: InputDecoration(
                       labelText: 'Название каталога',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      prefixIcon: const Icon(Icons.category),
+                      prefixIcon: Icon(Icons.category, color: Color(0xFF43A047)), // Ярко-зеленый
                     ),
                     validator: (value) => value?.isEmpty ?? true ? 'Введите название' : null,
                   ),
@@ -645,9 +649,10 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                           onPressed: _clearCatalogForm,
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            side: const BorderSide(color: Colors.pinkAccent),
+                            side: BorderSide(color: Color(0xFF4CAF50)), // Зеленая рамка
+                            backgroundColor: Color(0xFFE8F5E9), // Светло-зеленый фон
                           ),
-                          child: const Text('Очистить', style: TextStyle(color: Colors.pinkAccent)),
+                          child: Text('Очистить', style: TextStyle(color: Color(0xFF2E7D32), fontWeight: FontWeight.bold)), // Темно-зеленый текст
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -655,12 +660,12 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                         child: ElevatedButton(
                           onPressed: _addingCatalog ? null : _submitCatalogForm,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.pinkAccent,
+                            backgroundColor: Color(0xFF4CAF50), // Зеленый фон
                             padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
                           child: _addingCatalog
-                              ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2)
-                              : const Text('Добавить каталог', style: TextStyle(fontWeight: FontWeight.bold)),
+                              ? CircularProgressIndicator(color: Colors.white, strokeWidth: 2)
+                              : Text('Добавить каталог', style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ],
@@ -670,9 +675,9 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                   const Divider(),
                   const SizedBox(height: 20),
                   
-                  const Text(
+                  Text(
                     'Существующие каталоги:',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
                   ),
                   const SizedBox(height: 10),
                   
@@ -682,10 +687,10 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                             backgroundImage: NetworkImage(catalog.imageUrl!),
                             radius: 20,
                           )
-                        : const Icon(Icons.category, color: Colors.pinkAccent),
+                        : Icon(Icons.category, color: Color(0xFF43A047)), // Ярко-зеленая иконка
                     title: Text(catalog.name),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
+                      icon: Icon(Icons.delete, color: Colors.red),
                       onPressed: () => _deleteCatalog(catalog.id, catalog.name),
                     ),
                   )).toList(),
@@ -702,12 +707,12 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Text(
+                  Text(
                     'Добавить новый тип цветка',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.pinkAccent,
+                      color: Color(0xFF2E7D32), // Темно-зеленый
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -718,7 +723,7 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                     decoration: InputDecoration(
                       labelText: 'Название типа',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      prefixIcon: const Icon(Icons.local_florist),
+                      prefixIcon: Icon(Icons.local_florist, color: Color(0xFF43A047)), // Ярко-зеленый
                     ),
                     validator: (value) => value?.isEmpty ?? true ? 'Введите название' : null,
                   ),
@@ -731,9 +736,10 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                           onPressed: _clearFlowerTypeForm,
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            side: const BorderSide(color: Colors.pinkAccent),
+                            side: BorderSide(color: Color(0xFF4CAF50)), // Зеленая рамка
+                            backgroundColor: Color(0xFFE8F5E9), // Светло-зеленый фон
                           ),
-                          child: const Text('Очистить', style: TextStyle(color: Colors.pinkAccent)),
+                          child: Text('Очистить', style: TextStyle(color: Color(0xFF2E7D32), fontWeight: FontWeight.bold)), // Темно-зеленый текст
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -741,12 +747,12 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                         child: ElevatedButton(
                           onPressed: _addingFlowerType ? null : _submitFlowerTypeForm,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.pinkAccent,
+                            backgroundColor: Color(0xFF4CAF50), // Зеленый фон
                             padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
                           child: _addingFlowerType
-                              ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2)
-                              : const Text('Добавить тип', style: TextStyle(fontWeight: FontWeight.bold)),
+                              ? CircularProgressIndicator(color: Colors.white, strokeWidth: 2)
+                              : Text('Добавить тип', style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ),
                     ],
@@ -756,17 +762,17 @@ class _AdminProductsPageState extends State<AdminProductsPage> with SingleTicker
                   const Divider(),
                   const SizedBox(height: 20),
                   
-                  const Text(
+                  Text(
                     'Существующие типы:',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF2E7D32)),
                   ),
                   const SizedBox(height: 10),
                   
                   ..._flowerTypes.map((type) => ListTile(
-                    leading: const Icon(Icons.local_florist, color: Colors.pinkAccent),
+                    leading: Icon(Icons.local_florist, color: Color(0xFF43A047)), // Ярко-зеленая иконка
                     title: Text(type.name),
                     trailing: IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
+                      icon: Icon(Icons.delete, color: Colors.red),
                       onPressed: () => _deleteFlowerType(type.id, type.name),
                     ),
                   )).toList(),
