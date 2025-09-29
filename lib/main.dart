@@ -25,6 +25,7 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/admin/admin_management_page.dart';
 import 'package:flutter_app/screens/admin/products_page.dart';
 import 'package:flutter_app/screens/user/catalogs_page.dart';
 import 'package:provider/provider.dart';
@@ -111,7 +112,8 @@ class _MainScreenState extends State<MainScreen> {
 
   // Экран для админов  
   final List<Widget> _adminScreens = [
-    const PlaceholderWidget(title: "Управление", icon: Icons.dashboard),
+    const AdminManagementPage(),
+    // const PlaceholderWidget(title: "Управление", icon: Icons.dashboard),
     // const PlaceholderWidget(title: "Товары", icon: Icons.shopping_cart),
     const AdminProductsPage(), //Товары
     const PlaceholderWidget(title: "Заказы", icon: Icons.list_alt),

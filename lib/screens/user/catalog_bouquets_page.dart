@@ -272,6 +272,26 @@ void _showBouquetDetails(Bouquet bouquet) {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // ID букета - добавляем этот блок
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      'ID букета: ${bouquet.id}',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.grey[700],
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  
                   Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
@@ -302,7 +322,7 @@ void _showBouquetDetails(Bouquet bouquet) {
                   Text(
                     '${bouquet.price.toStringAsFixed(2)} руб.',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: Color(0xFF388E3C), // Зеленый цвет цены
+                          color: Color(0xFF388E3C),
                           fontWeight: FontWeight.bold,
                         ),
                   ),
@@ -328,7 +348,6 @@ void _showBouquetDetails(Bouquet bouquet) {
                               ),
                         ),
                         const SizedBox(height: 8),
-                        // Получаем названия цветов по их ID
                         FutureBuilder<List<FlowerType>>(
                           future: _bouquetRepository.getFlowerTypes(),
                           builder: (context, snapshot) {
@@ -366,7 +385,7 @@ void _showBouquetDetails(Bouquet bouquet) {
                                       fontSize: 12,
                                     ),
                                   ),
-                                  backgroundColor: Color(0xFF4CAF50), // Зеленый фон
+                                  backgroundColor: Color(0xFF4CAF50),
                                   side: BorderSide.none,
                                 );
                               }).toList(),
